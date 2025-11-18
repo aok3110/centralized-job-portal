@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Job Portal</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    
+    </style>
+</head>
+<body>
+
+<h1>Live Job Portal</h1>
+<div id="jobs">Loading...</div>
+
+<script>
+fetch("/api/jobs")
+.then(res => res.json())
+.then(data => {
+    let html = "";
+    data.forEach(job => {
+        html += `<div class="job-card">
+            <h3>${job.title}</h3>
+            <p>${job.company}</p>
+            <p>${job.location}</p>
+            <small>${job.source}</small>
+        </div>`;
+    });
+    document.getElementById("jobs").innerHTML = html;
+});
+</script>
+
+</body>
+</html>
